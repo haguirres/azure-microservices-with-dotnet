@@ -39,5 +39,5 @@ jobs:
           acrUsername: ${{ secrets.ACR_USERNAME }}
           acrPassword: ${{ secrets.ACR_PASSWORD }}
           containerAppName: wpm-management
-          resourceGroupName: rg-wpm-eus
+          resourceGroup: rg-wpm-eus
           imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/wpm-management-api:${{env.DATE_TIME}}.${{github.run_number}}
