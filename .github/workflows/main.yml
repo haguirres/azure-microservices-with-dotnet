@@ -31,3 +31,13 @@ jobs:
         run: |
           docker build src -f src/Wpm.Management.Api/Dockerfile -t ${{ secrets.ACR_LOGIN_SERVER }}/wpm-management-api:${{env.DATE_TIME}}.${{github.run_number}}
           docker push ${{ secrets.ACR_LOGIN_SERVER }}/wpm-management-api:${{env.DATE_TIME}}.${{github.run_number}}
+
+      - name: Deploy to Azure Container App
+        uses: azure/container-app-deploy-action@v2
+        with:
+          acrName: ${{ secrets.ACR_USERNAME }}
+          acrUsername: ${{ secrets.ACR_USERNAME }}
+          acrPassword: ${{ secrets.ACR_PASSWORD }}
+          containerAppName: wpm-management
+          resourceGroupName: rg-wpm-eus
+          imagenToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/wpm-management-api:${{env.DATE_TIME}}.${{github.run_number}}
